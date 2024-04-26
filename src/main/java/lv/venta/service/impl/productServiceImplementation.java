@@ -39,14 +39,19 @@ public class productServiceImplementation implements iProduct, iProductFiltering
 
 	@Override
 	public void updateById(int id, String title, String description, float price, int quantity) throws Exception {
-		// TODO Auto-generated method stub
-		
+		if(title == null || description == null || price < 0 || quantity <0) throw new Exception("Problem with input");
+		Product productForUpdating = retrieveById(id);
+		productForUpdating.setTitle(title);
+		productForUpdating.setDescription(description);
+		productForUpdating.setPrice(price);
+		productForUpdating.setQuantity(quantity);
+		productRepo.save(productForUpdating);
 	}
 
 	@Override
 	public void deleteById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		
+		Product productForDeleting = retrieveById(id);
+		productRepo.delete(productForDeleting);
 	}
 	
 	@Override
