@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<p> This is an exmple for Prodcut passing from JAVA to HTML </p>
+	<p th:text="${mypackage.getId()}"> </p>
+	<p th:text="${mypackage.getTitle()}"> </p>
+	<p th:text="${mypackage.getDescription()}"> </p>
+	<p th:text="${mypackage.getPrice()}"> </p>
+	<p th:text="${mypackage.getQuantity()}"> </p>
+	<p th:text="${mypackage.toString()}"> </p>
+	
+	<tr th:each="student: ${students}">
+	    <td th:text="${student.id}" />
+	    <td th:text="${student.name}" />
+	</tr>
+
+</body>
+
+</html>
