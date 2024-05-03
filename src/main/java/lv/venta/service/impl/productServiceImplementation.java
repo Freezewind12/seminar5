@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 import lv.venta.model.Product;
 import lv.venta.repo.IProductRepo;
-import lv.venta.service.iProduct;
+import lv.venta.service.IProductCRUDService;
 import lv.venta.service.iProductFiltering;
 
 @Service
-public class productServiceImplementation implements iProduct, iProductFiltering{
+public class productServiceImplementation implements IProductCRUDService, iProductFiltering{
 
 	@Autowired
 	private IProductRepo productRepo;
@@ -28,7 +28,7 @@ public class productServiceImplementation implements iProduct, iProductFiltering
 	}
 
 	@Override
-	public ArrayList<Product> retirveAll() throws Exception {
+	public ArrayList<Product> retrieveAll() throws Exception {
 		if(productRepo.count() == 0)throw new Exception("Product table is empty");
 		ArrayList<Product> result = (ArrayList<Product>) productRepo.findAll();
 		return result;
