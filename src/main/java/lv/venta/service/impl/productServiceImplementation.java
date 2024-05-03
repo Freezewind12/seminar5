@@ -18,8 +18,13 @@ public class productServiceImplementation implements iProduct, iProductFiltering
 	
 	@Override
 	public void create(String title, String description, float price, int quantity) throws Exception {
-		// TODO Auto-generated method stub
-		
+		if(title == null || description == null || price < 0 || quantity < 0)
+			throw new Exception("Problems with input param");
+		Product ProductFromDB = productRepo.findByTitleAndDescriptionAndPrice(title, description, price);
+			if(ProductFromDB != null) {
+				ProductFromDB.setQuantity(ProductFromDB.getQuantity() + quantity);
+				productRepo.save(ProductFromDB);
+			}
 	}
 
 	@Override
