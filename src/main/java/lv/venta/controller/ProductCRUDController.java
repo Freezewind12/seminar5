@@ -15,22 +15,25 @@ import lv.venta.service.IProductCRUDService;
 @RequestMapping("/product/crud")
 public class ProductCRUDController {
 	
-	@Autowired
-	private IProductCRUDService productCRUDService;
 	
-	@GetMapping("/all") // http://localhost:8080/product/crud/all
+	@Autowired
+	private IProductCRUDService productCRUDservice;
+	
+	
+	@GetMapping("/all") //localhost:8080/product/crud/all
 	public String getProductCrudAll(Model model) {
-
-		try {
-			ArrayList<Product> result = productCRUDService.retrieveAll();
-			model.addAttribute("",result);
-			return "show-all-product-page";
-		} 
-		catch (Exception e) {
-			model.addAttribute("mypackage", e.getMessage());
-			return "error-page";
-		}
 		
+	try
+	{
+		ArrayList<Product> result = productCRUDservice.retrieveAll();
+		model.addAttribute("mypackage", result);
+		return "show-all-product-page";//will show this html page in the web browser with mypackage data
+	}
+	catch (Exception e) {
+		model.addAttribute("mypackage", e.getMessage());
+		return "error-page";//will show error-page.html page with exception message
+	}
 		
 	}
+
 }
