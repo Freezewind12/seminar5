@@ -106,17 +106,21 @@ public class ProductCRUDController {
 		} catch (Exception e) {
 			model.addAttribute("mypackage", e.getMessage());
 			return "error-page";//will show error-page.html page with exception message
+			}
 		}
-		
-	}
 	@PostMapping("/update/{id}")
-	public String postProductCRUDUpdateById(@PathVariable("id") int id, Product product, Model model) {
+	public String postProductCRUDUpdateById(@PathVariable("id") int id, @Valid Product product, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "update-product-page";
+		}
+		else {
 		try {
 			productCRUDservice.updateById(id, product.getTitle(), product.getDescription(), product.getPrice(), product.getQuantity());
 			return "redirect:/product/crud/all";
 		} catch (Exception e) {
 			model.addAttribute("mypackage", e.getMessage());
 			return "error-page";//will show error-page.html page with exception message
+			}
 		}
 	}
 	@GetMapping("/delete/{id}")// localhost:8080/product/crud/delete/1

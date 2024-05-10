@@ -66,8 +66,10 @@ public class productServiceImplementation implements IProductCRUDService, iProdu
 	
 	@Override
 	public ArrayList<Product> filterByQuantityThreshold(int threshold) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		if(productRepo.count()==0) throw new Exception("Product table is empty");
+		ArrayList<Product> result = productRepo.findByQuantityLessThan(threshold);
+		if(result.isEmpty()) throw new Exception("There is no product which quantity is less than " + threshold);
+		return result;
 	}
 
 	@Override
