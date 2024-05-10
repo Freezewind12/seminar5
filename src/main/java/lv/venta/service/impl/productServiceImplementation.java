@@ -25,6 +25,11 @@ public class productServiceImplementation implements IProductCRUDService, iProdu
 				ProductFromDB.setQuantity(ProductFromDB.getQuantity() + quantity);
 				productRepo.save(ProductFromDB);
 			}
+			else {
+			Product newP = new Product(title, description, price, quantity);
+			productRepo.save(newP);
+			}
+			
 	}
 
 	@Override
